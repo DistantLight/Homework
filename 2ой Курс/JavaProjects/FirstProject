@@ -1,1 +1,103 @@
+import  java.util.Scanner;
 
+class Person{
+    private String name ;
+    private int age;
+    private String model;
+    private String number;
+
+    Person(){
+        name = "unknown";
+        age = 0;
+        model = "unknown";
+        number = "unknown";
+    }
+
+    Person(String name,int age,String model,String number){
+        this.name = name;
+        this.age = age;
+        this.model = model;
+        this.number = number;
+
+    }
+
+    void DisplayData(){
+        System.out.println("Имя : "+ this.name);
+        System.out.println("Год : "+this.age);
+        System.out.println("Модель : "+this.model);
+        System.out.println("Номер : "+this.number);
+    }
+
+    void SetAllData(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Введите имя.");
+        this.name = scan.nextLine();
+        System.out.println("Введите название модели.");
+        this.model = scan.nextLine();
+        System.out.println("Введите номер телефона.");
+        this.number = scan.nextLine();
+        System.out.println("Введите год.");
+        this.age = scan.nextInt();
+    }
+
+    void ChangeNumber(String new_number){
+        this.number = new_number;
+    }
+
+    void CheckNumber(){
+        if((this.number.substring(0,1)).equals("+")&(this.number.length()==12)){
+            System.out.println("Номер корректен");
+        } else {
+            System.out.println("Номер не корректен");
+        }
+    }
+
+    void Equals (Person person){
+        if((this.name.equals(person.name))&(this.model.equals(person.model))&(this.number.equals(person.number))&(this.age==person.age)){
+            System.out.println("Объекты равны");
+        }
+    }
+
+    void EqualsName(Person person){
+        if(this.name.equals(person.name)){
+            System.out.println("Имена одинаковые");
+        } else {
+            System.out.println("Имена различные");
+        }
+    }
+
+}
+
+public class Main {
+    public static void main (String [] args){
+        Scanner scan = new Scanner(System.in);
+
+        Person Vasya = new Person();
+        Person Petya = new Person();
+
+
+        System.out.println("Введите данные о Васе.");
+        Vasya.SetAllData();
+        System.out.println("Введите данные о Пете.");
+        Petya.SetAllData();
+
+        Vasya.CheckNumber();
+
+        System.out.println("Информация о Васе.");
+        Vasya.DisplayData();
+        System.out.println("Информация о Пете.");
+        Petya.DisplayData();
+
+        System.out.println("Введите количество создаваемых экземпляров");
+        int var = scan.nextInt();
+
+        Person [] array= new Person[var];
+
+        for(int i = 0; i < var; i++) {
+            System.out.println("Человек под номером: " + (i+1));
+            array[i] = new Person();
+            array[i].SetAllData();
+        }
+
+    }
+}
