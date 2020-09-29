@@ -1,12 +1,12 @@
 import  java.util.Scanner;
 
-class Person{
+class Person{                                             //создание класса Person
     private String name ;
     private int age;
     private String model;
     private String number;
 
-    Person(){
+    Person(){                                              //создание конструкторов
         name = "unknown";
         age = 0;
         model = "unknown";
@@ -21,14 +21,14 @@ class Person{
 
     }
 
-    void DisplayData(){
+    void DisplayData(){                                     //функция вывода инфы о экземпляре
         System.out.println("Имя : "+ this.name);
         System.out.println("Год : "+this.age);
         System.out.println("Модель : "+this.model);
         System.out.println("Номер : "+this.number);
     }
 
-    void SetAllData(){
+    void SetAllData(){                                       //функция установки параметров экземпляра
         Scanner scan = new Scanner(System.in);
         System.out.println("Введите имя.");
         this.name = scan.nextLine();
@@ -40,11 +40,11 @@ class Person{
         this.age = scan.nextInt();
     }
 
-    void ChangeNumber(String new_number){
+    void ChangeNumber(String new_number){                      //функция изменения номера
         this.number = new_number;
     }
 
-    void CheckNumber(){
+    void CheckNumber(){                                        //ф-ия проверки номера
         if((this.number.substring(0,1)).equals("+")&(this.number.length()==12)){
             System.out.println("Номер корректен");
         } else {
@@ -52,13 +52,13 @@ class Person{
         }
     }
 
-    void Equals (Person person){
+    void Equals (Person person){                                 //ф-ия сравнения экземпляров
         if((this.name.equals(person.name))&(this.model.equals(person.model))&(this.number.equals(person.number))&(this.age==person.age)){
             System.out.println("Объекты равны");
         }
     }
 
-    void EqualsName(Person person){
+    void EqualsName(Person person){                               //ф-ия сравнения имён
         if(this.name.equals(person.name)){
             System.out.println("Имена одинаковые");
         } else {
@@ -72,7 +72,7 @@ public class Main {
     public static void main (String [] args){
         Scanner scan = new Scanner(System.in);
 
-        Person Vasya = new Person();
+        Person Vasya = new Person();                                //создание Пети и Васи
         Person Petya = new Person();
 
 
@@ -80,8 +80,7 @@ public class Main {
         Vasya.SetAllData();
         System.out.println("Введите данные о Пете.");
         Petya.SetAllData();
-
-        Vasya.CheckNumber();
+        
 
         System.out.println("Информация о Васе.");
         Vasya.DisplayData();
