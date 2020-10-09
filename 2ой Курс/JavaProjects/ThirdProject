@@ -1,0 +1,76 @@
+import  java.util.Scanner ;
+
+enum Money{
+    USD(76.3),EUR(90.43),CHF(84.92),JPY(0.74),GBP(101.3),UAH(2.76);
+    double rate;
+    Money(double rate){
+        this.rate = rate;
+    }
+
+}
+
+class Dog {
+    void bark(int i) {
+        System.out.println("Лай");
+    }
+
+    void bark(String i) {
+        System.out.println("завывание");
+    }
+
+    void bark(float i) {
+        System.out.println("поскуливание");
+    }
+}
+
+
+class Car{
+    private String color;
+    private int age;
+    private int speed;
+
+    Car(int age,int speed){
+        this.age= age;
+        this.speed = speed;
+    }
+
+    Car(String color){
+        this.color = color;
+    }
+}
+
+
+
+public class Main {
+    public static void main(String [] args) {
+        Car car = new Car(5, 300);
+
+
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Введите название нужной вам валюты ");
+        String name = scan.nextLine();
+        Money money = Money.valueOf(name);
+
+        switch (money){
+            case USD:
+                System.out.println(money.rate);
+                break;
+            case EUR:
+                System.out.println(money.rate);
+                break;
+            case CHF:
+                System.out.println(money.rate);
+                break;
+            case JPY:
+                System.out.println(money.rate);
+                break;
+            case GBP:
+                System.out.println(money.rate);
+                break;
+            case UAH:
+                System.out.println(money.rate);
+                break;
+            }
+
+        }
+    }
