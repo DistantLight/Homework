@@ -34,8 +34,10 @@ class Car{
         this.speed = speed;
     }
 
-    Car(String color){
-        this.color = color;
+    Car(){
+        color = "Green";
+        age = 0;
+        speed = 200;
     }
 }
 
