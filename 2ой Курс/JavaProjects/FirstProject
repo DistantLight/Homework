@@ -6,7 +6,10 @@ class Person{                                             //создание к�
     private String model;
     private String number;
 
+    private static int count;                           //счётчик созданных экземпляров
+
     Person(){                                              //создание конструкторов
+        count++;
         name = "unknown";
         age = 0;
         model = "unknown";
@@ -14,11 +17,16 @@ class Person{                                             //создание к�
     }
 
     Person(String name,int age,String model,String number){
+        count++;
         this.name = name;
         this.age = age;
         this.model = model;
         this.number = number;
 
+    }
+
+    int GetCount(){                                             //геттер для счётчика созданный экземпляров
+        return count;
     }
 
     void DisplayData(){                                     //функция вывода инфы о экземпляре
@@ -80,7 +88,7 @@ public class Main {
         Vasya.SetAllData();
         System.out.println("Введите данные о Пете.");
         Petya.SetAllData();
-        
+
 
         System.out.println("Информация о Васе.");
         Vasya.DisplayData();
@@ -98,5 +106,6 @@ public class Main {
             array[i].SetAllData();
         }
 
+        System.out.println("Кол-во доступных экземпляров "+Vasya.GetCount());           //вывод кол-ва доступных экземпляров
     }
 }
