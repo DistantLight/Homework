@@ -1,0 +1,125 @@
+import  java.util.Scanner ;
+
+class Car{                                                  //создание класса Car
+    private String model;
+    private String color;
+    private int speed;
+
+    void SetAllData() {                                                             //метод установки параметров экземпляра
+        System.out.println("Установите параметры машины");
+        Scanner scan = new Scanner(System.in);
+        this.model = scan.nextLine();
+        this.color = scan.nextLine();
+        this.speed = scan.nextInt();
+    }
+
+    public void DisplayAllData(){                                           //метод вывода инфы о машине
+        System.out.println("Данные о машине");
+        System.out.println(model);
+        System.out.println(color);
+        System.out.println(speed);
+    }
+
+
+    Car(){                                                              //конструктор
+        color = "Unknown";
+        model = "Unknown";
+        speed = 0;
+    }
+}
+
+
+
+class Person{                                               //создание класса Person
+    private String name ;
+    private int age;
+    private String number;
+
+    Person(){                                              //создание конструктора класса Person
+        name = "unknown";
+        age = 0;
+        number = "unknown";
+    }
+
+    void SetAllData(){                                       //функция установки параметров экземпляра
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Введите имя.");
+        this.name = scan.nextLine();
+        System.out.println("Введите номер телефона.");
+        this.number = scan.nextLine();
+        System.out.println("Введите дату рождения");
+        this.age = scan.nextInt();
+    }
+
+    boolean EqualsNumber(String number){               //ф-ия сравнения номера телефона
+        return this.number.equals(number);
+    }
+
+    void ChangeNumber(String new_number){                      //функция изменения номера
+        this.number = new_number;
+    }
+
+
+}
+
+
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        Scanner scaner = new Scanner(System.in);
+        System.out.println("Введите количество людей");
+        int var = scan.nextInt();                                                   //переменная, хранящая кол-во людей в базе данных
+
+        Person [] personArray= new Person[var];
+        Car [] carArray = new Car[var];
+
+        for(int i = 0; i < var; i++) {
+            System.out.println("Человек под номером: " + i);
+            personArray[i] = new Person();
+            carArray[i]= new Car();
+            personArray[i].SetAllData();
+            carArray[i].SetAllData();
+        }
+
+
+        System.out.println("Введите 1, если нужно получить информацию о машине, зная номер телефона человека ");
+        System.out.println("Введите 2, если нужно изменить информацию о машине, зная номер телефона человека ");
+        System.out.println("Введите 3, если нужно изменить номер человека, зная его старый номер");
+        int n = sc.nextInt();
+        String numb;
+        switch(n){
+            case 1:
+                System.out.println("Введите номер телефона");
+                numb = scaner.nextLine();
+                for(int i = 0; i < var; i++) {
+                    if (personArray[i].EqualsNumber(numb)) {
+                        carArray[i].DisplayAllData();
+                    }
+                }
+                break;
+            case 2:
+                System.out.println("Введите номер телефона");
+                numb = scaner.nextLine();
+                for(int i = 0; i < var; i++) {
+                    if (personArray[i].EqualsNumber(numb)) {
+                        carArray[i].SetAllData();
+                    }
+                }
+                break;
+            case 3:
+                System.out.println("Введите старый номер телефона");
+                numb = scaner.nextLine();
+                for(int i = 0; i < var; i++) {
+                    if (personArray[i].EqualsNumber(numb)) {
+                        System.out.println("Введите новый номер телефона");
+                        numb = scaner.nextLine();
+                        personArray[i].ChangeNumber(numb);
+                    }
+                }
+
+        }
+
+    }
+}
