@@ -1,15 +1,15 @@
 import  java.util.Scanner;
 
-class Solution{
+class Solution{                                                    //отдельный класс для ф-ии Фибоначи
 
-    void DisplayMassive(int[] massive){
+    void DisplayMassive(int[] massive){                             //метод вывода массива
         for (int i = 0; i < massive.length; i++) {
             System.out.println(massive[i]);
         }
     }
 
     int k=0,t=1,res;
-    int[] Fib(int n){
+    int[] Fib(int n){                                           //ф-ия Фибоначи, возвращающая массив
         int [] array= new int[n];
                 array[0]=0;
                 array[1]=1;
@@ -34,7 +34,7 @@ public class Main {
 
     int k=0,t=1,res;
 
-    void Fib(int n){
+    void Fib(int n){                                    //ф-ия,выводящая последовательнось Фибоначи
         switch (n) {
             case 1:
                 System.out.println("0");
@@ -56,7 +56,7 @@ public class Main {
     public static void main (String [] args){
         Scanner scan = new Scanner(System.in);
 
-        for(int i=0;i<=4;i++) {
+        for(int i=0;i<=4;i++) {                                                     //цикл, выводящий все значения switch
             switch (i) {
                 case 1:
                     System.out.println("Секция 1");
