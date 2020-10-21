@@ -1,15 +1,15 @@
 import  java.util.Scanner ;
 
-enum Money{
+enum Money{                                                                                         //перечисление с названиями 6 типов денег
     USD(76.3),EUR(90.43),CHF(84.92),JPY(0.74),GBP(101.3),UAH(2.76);
-    double rate;
-    Money(double rate){
+    double rate;                                                                                    //переменная, хранящая значение курса
+    Money(double rate){                                                                               //конструктор
         this.rate = rate;
     }
 
 }
 
-class Dog {
+class Dog {                     //класс Dog с перегруженным методом bark
     void bark(int i) {
         System.out.println("Лай");
     }
@@ -24,7 +24,7 @@ class Dog {
 }
 
 
-class Car{
+class Car{                              //класс c перегруженными конструкторами
     private String color;
     private int age;
     private int speed;
@@ -51,7 +51,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         System.out.println("Введите название нужной вам валюты ");
         String name = scan.nextLine();
-        Money money = Money.valueOf(name);
+        Money money = Money.valueOf(name);              //объявление экземпляра перечисления с помощью valueOF()
 
         switch (money){
             case USD:
@@ -72,7 +72,7 @@ public class Main {
             case UAH:
                 System.out.println(money.rate);
                 break;
-            }
-
         }
+
     }
+}
