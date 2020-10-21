@@ -30,12 +30,12 @@ class Car{                                                  //создание �
 
 
 
-class Person{                                               //создание класса Person
+class Human{                                               //создание класса Person
     private String name ;
     private int age;
     private String number;
 
-    Person(){                                              //создание конструктора класса Person
+    Human(){                                              //создание конструктора класса Person
         name = "unknown";
         age = 0;
         number = "unknown";
@@ -70,14 +70,14 @@ public class Main {
         System.out.println("Введите количество людей");
         int var = scan.nextInt();                                                   //переменная, хранящая кол-во людей в базе данных
 
-        Person [] personArray= new Person[var];
+        Human [] humanArray= new Human[var];
         Car [] carArray = new Car[var];
 
         for(int i = 0; i < var; i++) {
             System.out.println("Человек под номером: " + i);
-            personArray[i] = new Person();
+            humanArray[i] = new Human();
             carArray[i]= new Car();
-            personArray[i].SetAllData();
+            humanArray[i].SetAllData();
             carArray[i].SetAllData();
         }
 
@@ -93,7 +93,7 @@ public class Main {
                 System.out.println("Введите номер телефона");
                 numb = scan.nextLine();
                 for(int i = 0; i < var; i++) {
-                    if (personArray[i].EqualsNumber(numb)) {
+                    if (humanArray[i].EqualsNumber(numb)) {
                         carArray[i].DisplayAllData();
                     }
                 }
@@ -102,7 +102,7 @@ public class Main {
                 System.out.println("Введите номер телефона");
                 numb = scan.nextLine();
                 for(int i = 0; i < var; i++) {
-                    if (personArray[i].EqualsNumber(numb)) {
+                    if (humanArray[i].EqualsNumber(numb)) {
                         carArray[i].SetAllData();
                     }
                 }
@@ -111,10 +111,10 @@ public class Main {
                 System.out.println("Введите старый номер телефона");
                 numb = scan.nextLine();
                 for(int i = 0; i < var; i++) {
-                    if (personArray[i].EqualsNumber(numb)) {
+                    if (humanArray[i].EqualsNumber(numb)) {
                         System.out.println("Введите новый номер телефона");
                         numb = scan.nextLine();
-                        personArray[i].ChangeNumber(numb);
+                        humanArray[i].ChangeNumber(numb);
                     }
                 }
 
