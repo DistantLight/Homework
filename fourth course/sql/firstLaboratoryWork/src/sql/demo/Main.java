@@ -3,7 +3,7 @@ package sql.demo;
 import java.sql.*;
 
 public class Main {
-    public static final String DB_URL = "jdbc:h2:g:/Java/Homework/db/smartphoneStore";    //создание бд при первом обращении
+    public static final String DB_URL = "jdbc:h2:g:/Java/Homework/db/smartphoneStore";    //для создания бд при первом подключении
     public static final String DB_Driver = "org.h2.Driver";
 
     public static void main(String[] args) {
@@ -24,7 +24,7 @@ public class Main {
 
             /*
             statement.executeUpdate (
-                    "INSERT INTO smartphones(id, name, price, available_in_stock)" +
+                            "INSERT INTO smartphones(id, name, price, available_in_stock)" +
                             "VALUES" +
                             "(1, 'Samsung Galaxy A23 4/64GB', 16, false)," +
                             "(2, 'Xiaomi Redmi 9A 2/32GB', 6, true)," +
@@ -47,14 +47,49 @@ public class Main {
                             "(19, 'Huawei P50 8/256GB', 250, true)," +
                             "(20, 'TECNO Pova 3 6/128GB', 16, false);"
             );
-
              */
 
+            ResultSet resultSet = statement.executeQuery (
+                    "SELECT * FROM smartphones;"
+            );
+            while (resultSet.next()){
+                System.out.println( resultSet.getInt("id") + " " +
+                        resultSet.getString("name") + " " +
+                        resultSet.getInt("price") + " " +
+                        resultSet.getBoolean("available_in_stock"));
+            }
+
+            resultSet = statement.executeQuery (
+                    "SELECT * " +
+                            "FROM smartphones " +
+                            "WHERE id = 3 ;"
+
+            );
+            while (resultSet.next()){
+                System.out.println( resultSet.getInt("id") + " " +
+                        resultSet.getString("name") + " " +
+                        resultSet.getInt("price") + " " +
+                        resultSet.getBoolean("available_in_stock"));
+            }
+
+            resultSet = statement.executeQuery (
+                    "SELECT * " +
+                            "FROM smartphones " +
+                            "WHERE available_in_stock IS TRUE ;"
+
+            );
+            while (resultSet.next()){
+                System.out.println( resultSet.getInt("id") + " " +
+                        resultSet.getString("name") + " " +
+                        resultSet.getInt("price") + " " +
+                        resultSet.getBoolean("available_in_stock"));
+            }
+
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // обработка ошибки  Class.forName
             System.out.println("JDBC драйвер для СУБД не найден!");
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
             System.out.println("Ошибка SQL !");
         } finally {
             try {
