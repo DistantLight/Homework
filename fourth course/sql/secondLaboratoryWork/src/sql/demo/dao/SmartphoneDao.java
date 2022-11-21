@@ -10,19 +10,10 @@ import java.util.Optional;
 
 public class SmartphoneDao {
     private static final SmartphoneDao INSTANCE = new SmartphoneDao();
-    private static final String DELETE_SQL =
-            "DELETE FROM smartphones " +
-            "WHERE id = ? ;";
     private static final String SAVE_SQL =
             "INSERT INTO smartphones " +
             "(id, name, price, available_in_stock)" +
             "VALUES (?,?,?,?);";
-    private static final String UPDATE_SQL =
-            "Update smartphones " +
-            "Set name = ?" +
-            "price = ?" +
-            "available_in_stock = ?" +
-            "WHERE id = ?;";
     private static final String FIND_BY_ID_SQL =
             "SELECT * " +
             "FROM smartphones " +
@@ -126,22 +117,6 @@ public class SmartphoneDao {
         }
     }
 
-    public void deleteById(int id){
-        try {
-            SmartphoneStoreDB.connect();
-            Connection connection = SmartphoneStoreDB.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SQL);
-            preparedStatement.setInt(1,id);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Ошибка SQL !");
-            System.out.println("NullPointerException !");
-        } finally {
-            SmartphoneStoreDB.disconnect();
-        }
-    }
-
     public void save(Smartphone smartphone){
         try {
             SmartphoneStoreDB.connect();
@@ -161,22 +136,4 @@ public class SmartphoneDao {
         }
     }
 
-    public void update(Smartphone smartphone){
-        try {
-            SmartphoneStoreDB.connect();
-            Connection connection = SmartphoneStoreDB.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SQL);
-            preparedStatement.setString(1,smartphone.getName());
-            preparedStatement.setInt(2,smartphone.getPrice());
-            preparedStatement.setBoolean(3,smartphone.isAvailable_in_stock());
-            preparedStatement.setInt(4,smartphone.getId());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Ошибка SQL !");
-            System.out.println("NullPointerException !");
-        } finally {
-            SmartphoneStoreDB.disconnect();
-        }
-    }
 }

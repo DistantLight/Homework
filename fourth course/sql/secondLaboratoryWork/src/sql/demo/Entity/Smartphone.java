@@ -1,7 +1,6 @@
 package sql.demo.Entity;
 
 public class Smartphone {
-
     private int id;
     private String name;
     private int price;

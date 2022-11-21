@@ -57,17 +57,17 @@ public class SmartphoneStoreDB {
             preparedStatement.execute();
 
             preparedStatement = connection.prepareStatement(
-                    "CREATE TABLE IF NOT EXISTS clients(" +
+                            "CREATE TABLE IF NOT EXISTS clients(" +
                             "id INT PRIMARY KEY," +
                             "name varchar(128)," +
-                            "phone_number INT, " +
+                            "phone_number varchar(128), " +
                             "smartphone_id INT, " +
                             "FOREIGN KEY (smartphone_id) REFERENCES smartphones (id) " +
                             ");"
             );
             preparedStatement.execute();
 
-
+            /*
             preparedStatement = connection.prepareStatement(
                     "INSERT INTO smartphones(id, name, price, available_in_stock)" +
                             "VALUES" +
@@ -93,7 +93,24 @@ public class SmartphoneStoreDB {
                             "(20, 'TECNO Pova 3 6/128GB', 16, false);"
             );
             preparedStatement.execute();
+             */
 
+            /*
+            preparedStatement = connection.prepareStatement(
+                    "INSERT INTO clients(id, name, smartphone_id, phone_number)" +
+                            "VALUES" +
+                            "(1, 'Sergey', 4, 89200512051)," +
+                            "(2, 'Maxim', 1, 89200512053)," +
+                            "(3, 'Alexey', 15, 89243542051)," +
+                            "(4, 'Anton', 10 , 82202112051)," +
+                            "(5, 'Alexander', 9, 89200012051)," +
+                            "(6, 'Anastasia', 6, 87702112051)," +
+                            "(7, 'Sonya', 7, 82202112345)," +
+                            "(8, 'Danil', 1, 82202119999);"
+            );
+            preparedStatement.execute();
+
+             */
 
         } catch (SQLException e) {
             e.printStackTrace();
