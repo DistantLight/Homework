@@ -1,6 +1,8 @@
 package sql.demo;
 
+import sql.demo.Entity.Client;
 import sql.demo.Entity.Smartphone;
+import sql.demo.dao.ClientDao;
 import sql.demo.dao.SmartphoneDao;
 
 import java.util.Optional;
@@ -33,5 +35,16 @@ public class Test {
             System.out.print(smartphone.isAvailable_in_stock() + " ");
             System.out.println();
         }
+
+        for (Client client : ClientDao.getInstance().findAll() ) {
+            System.out.print(client.getId() + " ");
+            System.out.print(client.getName() + " ");
+            System.out.print(client.getPhoneNumber() + " ");
+            System.out.print(client.getSmartphoneId() + " ");
+            System.out.println();
+        }
+
+        Optional<Client> client = ClientDao.getInstance().findById(3);
+        System.out.println(client.get());
     }
 }
