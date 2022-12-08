@@ -1,8 +1,11 @@
 var http = require("http");
 var fs = require("fs");
+var sqlite3 = require("sqlite3").verbose();
+var db = new sqlite3.Database("SmartphoneStore.db");
 // request, response
 http.createServer(function (req, res) {
 	console.log("request: " + req.url);
+	let body;
 	switch(req.url) {
 		case "/":
 			fs.readFile("./ajax_demo.html", function(err, content) {
@@ -16,13 +19,29 @@ http.createServer(function (req, res) {
 				}
 			});
 			break;
-		case "/call1":
-				res.writeHead(200, {"Content-Type": "text/plain; charset=utf-8"});
-				res.end("reply for /call1");
-				break;
-		case "/call2":
-				res.writeHead(200, {"Content-Type": "text/plain; charset=utf-8"});
-				res.end("reply for /call2");
+		case "/filterRecords":
+			body = "";
+			req.on('data', d => body += d);
+			req.on('end', () => {
+				let sqlString = "SELECT * FROM smartphones WHERE price =" + body;
+				db.all(sqlString,function(err, rows){
+					res.writeHead(200, {"Content-Type": "application/json; charset=utf-8"});
+					res.write(JSON.stringify(rows));
+					res.end();
+				});
+			});
+			break;	
+			case "/showAll":
+				body = "";
+				req.on('data', d => body += d);
+				req.on('end', () => {
+					let sqlString = "SELECT * FROM smartphones";
+					db.all(sqlString,function(err, rows){
+						res.writeHead(200, {"Content-Type": "application/json; charset=utf-8"});
+						res.write(JSON.stringify(rows));
+						res.end();
+					});
+				});
 				break;	
 		default:
 				res.writeHead(404, {"Content-Type": "text/html; charset=utf-8"});
@@ -39,4 +58,5 @@ http.createServer(function (req, res) {
 					"</html>\n");
 	}
 }).listen(3000);
+
 console.log("Server running at http://localhost:3000/");
