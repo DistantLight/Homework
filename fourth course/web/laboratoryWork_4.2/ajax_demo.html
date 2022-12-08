@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Node+http+ajax web app basic demo</title>
+    <meta charset="UTF-8" />
+    <script type="text/javascript">
+        function readServerString(url, callback) { //ф-ия для удобства
+            var req = new XMLHttpRequest();  //для создания запроса
+            req.onreadystatechange = function () {  //вешаем callback, будет вызываться при каждом изменении состояния req
+                if (req.readyState === 4) { // only if req is "loaded" - ответ пришел
+                    if (req.status === 200) { // only if "OK"
+                        callback(undefined, req.responseText); //вызов колбэка переданного в фугкцию; responseText - текст ответа
+                    } else { // error
+                        callback(new Error(req.status));
+                    }
+                }
+            };
+			var phone_price = document.getElementById('phone_price').value
+            // can't use GET method here as it would quickly
+            // exceede max length limitation
+            req.open("POST", url, true); //для отправки; url - /call1 или /call2
+            //Send the proper header information along with the request
+            req.setRequestHeader("Content-type", "text/plain");
+
+            req.send(phone_price); //отправка
+        }
+
+        function filterRecords() {
+            readServerString("/filterRecords", function (err, response) {
+                if (!err) {
+                    var rows = JSON.parse(response);
+
+                    var temp =
+                        "<table>\n" +
+                        "<tr><th>id</th><th>name</th><th>price</th><th>available_in_stock</th></tr> \n";
+
+                    for (var i = 0; i < rows.length; i++) {
+                      var row = rows[i];
+                      temp +=
+                            "<tr><td>" + row.id + "</td>" +
+                            "<td>" + row.name + "</td>" +
+                            "<td>" + row.price + "</td>" +
+                            "<td>" + row.available_in_stock + "</td> </tr>\n";
+                    }
+                    temp +="</table>\n";
+                    document.getElementById("call_res").innerHTML = temp;
+                } else {
+                    document.getElementById("call_res").innerHTML =
+                        "<span style='color: red'>" + err + "</span>";
+                }
+            });
+        }
+
+        function showAll() {
+            readServerString("/showAll", function (err, response) {
+                if (!err) {
+                    var rows = JSON.parse(response);
+
+                    var temp =
+                        "<table>\n" +
+                        "<tr><th>id</th><th>name</th><th>price</th><th>available_in_stock</th></tr> \n";
+
+                    for (var i = 0; i < rows.length; i++) {
+                      var row = rows[i];
+                      temp +=
+                            "<tr><td>" + row.id + "</td>" +
+                            "<td>" + row.name + "</td>" +
+                            "<td>" + row.price + "</td>" +
+                            "<td>" + row.available_in_stock + "</td> </tr>\n";
+                    }
+                    temp +="</table>\n";
+                    document.getElementById("call_res").innerHTML = temp;
+                } else {
+                    document.getElementById("call_res").innerHTML =
+                        "<span style='color: red'>" + err + "</span>";
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <p>
+		<form name="price_form" method="POST" action="javascript:filterRecords()">
+			<div>Введите цену смартфона</div>
+			<input type="text" name="val" id="phone_price">
+			<input type="submit" name="submit_btn" value="Отправить">
+		</form>
+        <a href="javascript:showAll()">Вывести все записи из таблицы</a>
+    </p>
+    <p>
+        Результат: <span id="call_res" style="font-style: italic"></span>
+    </p>
+</body>
+
+</html>
